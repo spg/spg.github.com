@@ -112,6 +112,7 @@ we're creating a database for testing. When the test is over, the fixture's fina
 Note that the finalizer will be executed whether the test has passed or failed.
 
 If you want to automatically use a fixture for any tests in our module, use the `autouse=True` parameter, like this:
+
 ```python
 import pytest
 import explodingobjects
@@ -138,7 +139,7 @@ def test_good_christmas_gift1():
 def test_good_christmas_gift2():
     assert not good_christmas_gift("hoverboard")
 ```
-now, we don't have to inject `explodingobjects_connection` into our test functions.
+Now, we don't have to inject `explodingobjects_connection` into our test functions.
 The database will be populated before each test, and cleared after each test.
 
 What if I want to retrieve the database connection from within my test? Look at this:
