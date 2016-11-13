@@ -1,7 +1,6 @@
 # Site settings
 title: spgingras
-description: > # this means to ignore newlines until "baseurl:"
-  Simon-Pierre Gingras's blog
+
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://spg.github.io" # the base hostname & protocol for your site
 twitter_username: spgingras
