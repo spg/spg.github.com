@@ -3,7 +3,7 @@ layout: post
 title: Short introduction to pytest
 ---
 
-When tasked with setting up a testing environment for our team at Poka, I knew I wanted the testing experience to be:
+When tasked with setting up a testing environment for our team at [Poka](https://poka.io), I knew I wanted the testing experience to be:
 
 * simple
 * fun
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
 In the example above, in order to write the simplest test case, I had to: import the `unittest` module, create a test class, write the `main` sentinel, include a `self` parameter in my test function and use the bundled `assertTrue` function.
 
-Compare this with the equivalent using `pytest`:
+Compare this with the equivalent using [pytest](https://pytest.org):
 
 ```python
 def can_explode(item):
@@ -218,7 +218,7 @@ This can be problematic if the 2nd or 3rd test cases are also failing, as you wo
 
 ### parallel testing
 You might want to run your tests in parallel in order to make your whole test suite run faster.
-Thankfully, there's a plugin called `pytest-xdist` that does just that. Install pytest-xdist, and now:
+Thankfully, there's a plugin called [pytest-xdist](https://pypi.python.org/pypi/pytest-xdist) that does just that. Install `pytest-xdist`, and now:
 
 ```shell
 py.test -n 8 
@@ -228,7 +228,7 @@ will run your tests using 8 CPUs.
 ### random testing 
 A property of good test suites is the ability to run all tests in any order. This will help you in finding tests that
 have dependencies on other tests (such as relying on the output of a previous test in order to work).
-You can use `pytest-random` in order to randomize your test execution:
+You can use [pytest-random](https://pypi.python.org/pypi/pytest-random) in order to randomize your test execution:
 
 ```shell
 py.test --random
