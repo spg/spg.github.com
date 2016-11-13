@@ -9,3 +9,6 @@ permalink: /blog/:title
 
 # Build settings
 markdown: kramdown
+
+# Google services
+google_analytics: UA-39204653-2
