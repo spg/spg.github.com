@@ -177,6 +177,7 @@ I can now use my database connection from within my test.
 Another small but useful feature of pytest is the `parametrize` marker.
 It will generate tests based on a set of test cases.
 This feature allows us to transform this test:
+
 ```python
 def can_explode(item):
     return item in ["Note 7", "hoverboard"]
@@ -187,7 +188,9 @@ def test_can_explode():
     assert not can_explode("Furby")
     assert can_explode("hoverboard")
 ```
+
 into 
+
 ```python
 import pytest
 
