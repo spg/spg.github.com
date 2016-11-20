@@ -87,17 +87,17 @@ Basically, fixtures are a replacement for the setup and teardown process we find
 
 ```python
 import pytest
-import explodingobjects
+import explodingobjects_db
 
 
 def good_christmas_gift(item):
-    conn = explodingobjects.connect()
+    conn = explodingobjects_db.connect()
     return not conn.exists(item)
 
 
 @pytest.fixture
-def explodingobjects_connection(request):
-    conn = explodingobjects.connect()
+def explodingobjects_db_connection(request):
+    conn = explodingobjects_db.connect()
     conn.add(["Note 7", "hoverboard"])
     def fin():
         conn.clear()
@@ -105,11 +105,11 @@ def explodingobjects_connection(request):
     request.addfinalizer(fin)
 
 
-def test_good_christmas_gift(explodingobjects_connection):
+def test_good_christmas_gift(explodingobjects_db_connection):
     assert not good_christmas_gift("Note 7")
 ```
 Here we declared a `pytest` fixture using the `@pytest.fixture` decorator, and we injected this fixture as a parameter to our `test_good_christmas_gift` function. 
-Whenever my `test_good_christmas_gift` is executed, pytest will execute `explodingobjects_connection` prior to executing my test. In our case,
+Whenever my `test_good_christmas_gift` is executed, pytest will execute `explodingobjects_db_connection` prior to executing my test. In our case,
 we're creating a database for testing. When the test is over, the fixture's finalizer (here, the `fin` function) will be executed, in our case clearing the test database. 
 Note that the finalizer will be executed whether the test has passed or failed.
 
@@ -117,17 +117,17 @@ If you want to automatically use a fixture for any tests in our module, use the 
 
 ```python
 import pytest
-import explodingobjects
+import explodingobjects_db
 
 
 def good_christmas_gift(item):
-    conn = explodingobjects.connect()
+    conn = explodingobjects_db.connect()
     return not conn.exists(item)
 
 
 @pytest.fixture(autouse=True)
-def explodingobjects_connection(request):
-    conn = explodingobjects.connect()
+def explodingobjects_db_connection(request):
+    conn = explodingobjects_db.connect()
     conn.add(["Note 7", "hoverboard"])
     def fin():
         conn.clear()
@@ -141,24 +141,25 @@ def test_good_christmas_gift1():
 def test_good_christmas_gift2():
     assert not good_christmas_gift("hoverboard")
 ```
-Now, we don't have to inject `explodingobjects_connection` into our test functions.
+
+Now, we don't have to inject `explodingobjects_db_connection` into our test functions.
 The database will be populated before each test, and cleared after each test.
 
 What if I want to retrieve the database connection from within my test? Look at this:
 
 ```python
 import pytest
-import explodingobjects
+import explodingobjects_db
 
 
 def good_christmas_gift(item):
-    conn = explodingobjects.connect()
+    conn = explodingobjects_db.connect()
     return not conn.exists(item)
 
 
 @pytest.fixture
-def explodingobjects_connection(request):
-    conn = explodingobjects.connect()
+def explodingobjects_db_connection(request):
+    conn = explodingobjects_db.connect()
     conn.add(["Note 7", "hoverboard"])
     def fin():
         conn.clear()
@@ -168,11 +169,11 @@ def explodingobjects_connection(request):
     return conn
 
 
-def test_good_christmas_giftexplodingobjects_connection):
-    explodingobjects_connection.add("Note 8")
+def test_good_christmas_gift(explodingobjects_db_connection):
+    explodingobjects_db_connection.add("Note 8")
     assert not good_christmas_gift("Note 8")
 ```
-The injected parameter `explodingobjects_connection` will be the actual value returned by the `explodingobjects_connection` function. 
+The injected parameter `explodingobjects_db_connection` will be the actual value returned by the `explodingobjects_db_connection` function. 
 I can now use my database connection from within my test.
 
 ### parametrize
