@@ -44,6 +44,7 @@ The act of writing a test has now been reduced to its simplest form: create a fu
 
 Speaking of assertions, one other nice feature of `pytest` is that you can use Python's `assert` keyword for declaring your assertions. This is once again much simpler than having to call `self.assertTrue(expr)`, as it does not require using external functions.
 Also, `pytest` does a great job of displaying the diff when yor assertion fails, for example:
+
 ```shell
 ====================== FAILURES ======================
 ___________________ test_exploded ____________________
@@ -57,6 +58,7 @@ E         + exp1oded
 E         ?    ^
 
 ```
+
 shows you the exact spot where your strings differ.
 
 Another facet of making tests accessible is to allow your team to run them easily. `pytest`'s test discovery algorithm makes it really simple to get your tests picked up.
